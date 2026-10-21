@@ -1,8 +1,15 @@
+"""
+Application Web Flask pour une calculatrice simple. 
+
+Ce module gère les requêtes HTTP, analyse les expressions mathématiques, 
+appelle l'opération appropriée et renvoie le résultat à l'utilisateur via une interface web.
+
+"""
 from flask import Flask, request, render_template
 from operators import add, subtract, multiply, divide
 
 app = Flask(__name__)
-
+# Associe les symboles d'opération aux fonctions correspondantes.
 OPS = {
     '+': add,
     '-': subtract,
@@ -11,14 +18,28 @@ OPS = {
 }
 
 def calculate(expr: str):
+    """
+    Évalue une expression mathématique contenant deux opérandes et un seul opérateur (+, -, *, /).
+    
+    Paramètres: 
+        expr (str): L'expression mathématique à évaluer, par exemple "3 + 4".
+
+    Return:
+        float: Le résultat de l'opération.
+
+    Raises:
+        ValueError: Si l'expression est vide, mal formée, ou si les opérandes ne sont pas des nombres.
+
+    """
     if not expr or not isinstance(expr, str):
         raise ValueError("empty expression")
-
+    # Retire les espaces avant d'analyser l'expression
     s = expr.replace(" ", "")
 
     op_pos = -1
     op_char = None
-
+    # Cette boucle parcourt chaque caractère de l'expression pour trouver 
+    # l'opérateur et qu'il y en a un seul.
     for i, ch in enumerate(s):
         if ch in OPS:
             if op_pos != -1:
@@ -33,6 +54,7 @@ def calculate(expr: str):
     left = s[:op_pos]
     right = s[op_pos+1:]
 
+    # Convertit les deux opérandes en float et gère les erreurs de conversion.
     try:
         a = float(left)
         b = float(right)
@@ -43,6 +65,12 @@ def calculate(expr: str):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    """
+    Affiche la page de la calculatrice et traite les expressions soumises par l'utilisateur via le formulaire HTML.
+
+    Return: 
+        str: Le rendu HTML de la page avec le résultat du calcul ou un message d'erreur.
+    """
     result = ""
     if request.method == 'POST':
         expression = request.form.get('display', '')
