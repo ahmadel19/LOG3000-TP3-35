@@ -20,6 +20,7 @@ OPS = {
 def calculate(expr: str):
     """
     Évalue une expression mathématique contenant deux opérandes et un seul opérateur (+, -, *, /).
+    Chaque opérande peut être précédé d'un signe, par exemple "-3+2" ou "3*-2".
     
     Paramètres: 
         expr (str): L'expression mathématique à évaluer, par exemple "3 + 4".
@@ -42,6 +43,10 @@ def calculate(expr: str):
     # l'opérateur et qu'il y en a un seul.
     for i, ch in enumerate(s):
         if ch in OPS:
+            # Un « + » ou « - » en début d'expression ou juste après l'opérateur
+            # est le signe d'un opérande (ex. -3+2, 3+-2), pas l'opération.
+            if ch in "+-" and (i == 0 or s[i - 1] in OPS):
+                continue
             if op_pos != -1:
                 raise ValueError("only one operator is allowed")
             op_pos = i
