@@ -1,0 +1,13 @@
+# Environnements virtuels
+.venv/
+venv/
+
+# Fichiers générés par Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Éditeurs et système
+.vscode/
+.idea/
+.DS_Store

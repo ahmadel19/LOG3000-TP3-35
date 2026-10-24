@@ -21,9 +21,9 @@ L'objectif est de configurer le projet sur GitHub afin de mieux collaborer, docu
    ```bash
    cd LOG3000-TP3-35
    ```
-3. Installer Flask :
+3. Installer les dépendances (Flask et pytest) :
    ```bash
-   pip install flask
+   pip install -r requirements.txt
    ```
 4. Lancer l'application :
    ```bash
@@ -40,27 +40,42 @@ L'objectif est de configurer le projet sur GitHub afin de mieux collaborer, docu
 
 ## Structure du projet
 
-```text
 LOG3000-TP3-35/
 ├── app.py
 ├── operators.py
 ├── README.md
+├── requirements.txt
 ├── static/
 │   ├── README.md
 │   └── style.css
-└── templates/
-   ├── README.md
-   └── index.html
-```
+├── templates/
+│   ├── README.md
+│   └── index.html
+└── tests/
+    ├── README.md
+    ├── test_operators.py
+    ├── test_calculate.py
+    ├── test_routes.py
+    └── test_interface.py
 
 ## Tests
 
-Les tests automatisés seront ajoutés dans un répertoire `tests/`.
+Les tests automatisés se trouvent dans le répertoire `tests/` (38 tests : unitaires,
+intégration de la route Flask et interface). Depuis la racine du projet :
 
-Pour exécuter les tests, il faut faire la commande suivante : 
 ```bash
-pytest
+pytest -v
 ```
+
+Les tests n'utilisent que le module `unittest` de Python : ils peuvent aussi être lancés
+sans pytest avec la commande suivante :
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+Le détail de ce que couvre chaque fichier, ainsi que le lien entre les tests et les issues,
+est décrit dans [`tests/README.md`](tests/README.md).
 
 ## Flux de contribution
 Le projet utilise Git et GitHub pour gérer les modifications.
