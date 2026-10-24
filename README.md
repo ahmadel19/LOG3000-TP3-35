@@ -40,6 +40,7 @@ L'objectif est de configurer le projet sur GitHub afin de mieux collaborer, docu
 
 ## Structure du projet
 
+```text
 LOG3000-TP3-35/
 ├── app.py
 ├── operators.py
@@ -57,7 +58,7 @@ LOG3000-TP3-35/
     ├── test_calculate.py
     ├── test_routes.py
     └── test_interface.py
-
+```
 ## Tests
 
 Les tests automatisés se trouvent dans le répertoire `tests/` (38 tests : unitaires,
